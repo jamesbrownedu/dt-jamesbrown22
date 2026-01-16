@@ -6,19 +6,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
+/* ===== GLOBAL ===== */
+html, body {
     margin: 0;
+    padding: 0;
+    background: #0e0e0e;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #2e3244, #36224b);
-    min-height: 100vh;
-    display: flex;
+    color: white;
 }
 
-/* PASSWORD OVERLAY */
+/* ===== PASSWORD OVERLAY ===== */
 #password-overlay {
     position: fixed;
     inset: 0;
-    background: linear-gradient(135deg, #1e1e2f, #2b1f3a);
+    background: radial-gradient(circle, #111 0%, #000 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,23 +27,23 @@ body {
 }
 
 .password-box {
-    background: rgba(0,0,0,0.4);
-    backdrop-filter: blur(12px);
+    background: #111;
     padding: 30px;
     border-radius: 14px;
     text-align: center;
-    width: 300px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    width: 320px;
+    border: 2px solid orange;
+    box-shadow: 0 0 30px rgba(255,165,0,0.3);
 }
 
 .password-box h2 {
-    color: white;
     margin-bottom: 15px;
+    color: orange;
 }
 
 .password-box input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
     border: none;
     outline: none;
@@ -52,88 +53,88 @@ body {
 
 .password-box button {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
     border: none;
-    background: rgb(89, 134, 218);
-    color: white;
+    background: orange;
+    color: black;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
 }
 
 .password-box button:hover {
-    background: #79aadb;
+    background: #ffb347;
 }
 
 #password-error {
-    color: #ff6b6b;
-    font-size: 14px;
+    color: #ff5a5a;
     margin-top: 10px;
 }
 
-/* SIDEBAR */
+/* ===== SIDEBAR ===== */
 .sidebar {
     position: fixed;
-    left: 0;
     top: 0;
-    width: 80px;
+    left: 0;
+    width: 90px;
     height: 100vh;
-    background: rgba(0,0,0,0.3);
-    backdrop-filter: blur(10px);
-    padding: 20px 10px;
+    background: #111;
+    border-right: 2px solid orange;
+    padding: 10px 5px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     overflow-y: auto;
-    z-index: 1000;
 }
 
 .sidebar button {
-    background: rgb(89, 134, 218);
+    background: orange;
     border: none;
-    color: white;
+    color: black;
     font-weight: bold;
-    padding: 10px;
-    border-radius: 8px;
+    padding: 10px 0;
+    border-radius: 6px;
     cursor: pointer;
 }
 
 .sidebar button:hover {
-    background: #79aadb;
+    background: #ffb347;
 }
 
-/* MAIN */
+/* ===== MAIN ===== */
 .main {
-    margin-left: 100px;
-    flex: 1;
-    padding: 20px;
+    padding-left: 110px;
+    padding-top: 20px;
+    padding-right: 20px;
 }
 
 h1 {
-    color: white;
     text-align: center;
+    color: orange;
 }
 
+/* ===== SECTIONS ===== */
 .section {
     max-width: 900px;
-    margin: 40px auto;
+    margin: 50px auto;
 }
 
 .section h2 {
-    color: white;
-    border-bottom: 3px solid rgba(255,255,255,0.3);
+    border-bottom: 2px solid orange;
     padding-bottom: 5px;
+    color: white;
 }
 
 .game-btn {
     width: 100%;
-    max-width: 600px;
-    padding: 15px;
+    max-width: 650px;
     margin: 10px auto;
+    padding: 14px;
     display: block;
-    border: none;
+    background: #1a1a1a;
+    border: 2px solid orange;
     border-radius: 10px;
-    background: rgb(89, 134, 218);
     color: white;
     font-size: 16px;
     text-align: left;
@@ -141,7 +142,8 @@ h1 {
 }
 
 .game-btn:hover {
-    background: #79aadb;
+    background: orange;
+    color: black;
 }
 </style>
 </head>
@@ -154,7 +156,7 @@ h1 {
         <h2>Enter Password</h2>
         <input type="password" id="password-input" placeholder="Password">
         <button onclick="checkPassword()">Unlock</button>
-        <p id="password-error"></p>
+        <div id="password-error"></div>
     </div>
 </div>
 
@@ -175,47 +177,45 @@ const files = [
     "cl1","cl2048","cl8ballpool","clamongus","clcookieclicker","clrun3",
     "clbloons","clbloonsTD5","clhappywheels","clminecraft","clslope",
     "clretrobowl","clfnaf","clfridaynightfunkin","clpokemonemerald"
-    // 🔥 YOU CAN DROP YOUR FULL LIST HERE
 ];
 
-/* PASSWORD LOGIC */
+/* PASSWORD */
 function checkPassword() {
-    const val = document.getElementById("password-input").value;
+    const input = document.getElementById("password-input").value;
     const err = document.getElementById("password-error");
-    if (val === PASSWORD) {
-        localStorage.setItem("James_unlocked", "yes");
+    if (input === PASSWORD) {
+        localStorage.setItem("James_unlocked", "true");
         document.getElementById("password-overlay").style.display = "none";
     } else {
         err.textContent = "Wrong password";
     }
 }
 
-if (localStorage.getItem("James_unlocked") === "yes") {
+if (localStorage.getItem("James_unlocked") === "true") {
     document.getElementById("password-overlay").style.display = "none";
 }
 
-/* BUILD UI */
+/* BUILD GAME LIST */
 const sections = {};
-files.sort().forEach(name => {
-    const letter = name[0].toUpperCase();
+files.sort().forEach(game => {
+    const letter = game[0].toUpperCase();
     if (!sections[letter]) sections[letter] = [];
-    sections[letter].push(name);
+    sections[letter].push(game);
 });
 
 const sidebar = document.getElementById("sidebar");
 const container = document.getElementById("sections");
 
 Object.keys(sections).sort().forEach(letter => {
-    // sidebar button
-    const sb = document.createElement("button");
-    sb.textContent = letter;
-    sb.onclick = () => document.getElementById("sec-"+letter).scrollIntoView({behavior:"smooth"});
-    sidebar.appendChild(sb);
+    const navBtn = document.createElement("button");
+    navBtn.textContent = letter;
+    navBtn.onclick = () =>
+        document.getElementById("sec-" + letter).scrollIntoView({ behavior: "smooth" });
+    sidebar.appendChild(navBtn);
 
-    // section
     const sec = document.createElement("div");
     sec.className = "section";
-    sec.id = "sec-"+letter;
+    sec.id = "sec-" + letter;
     sec.innerHTML = `<h2>${letter}</h2>`;
 
     sections[letter].forEach(game => {
@@ -224,7 +224,9 @@ Object.keys(sections).sort().forEach(letter => {
         btn.textContent = game;
         btn.onclick = () => {
             const win = window.open("about:blank");
-            win.document.write(`<iframe src="${game}.html" style="border:none;width:100%;height:100vh;"></iframe>`);
+            win.document.write(
+                `<iframe src="${game}.html" style="border:none;width:100%;height:100vh;"></iframe>`
+            );
         };
         sec.appendChild(btn);
     });
