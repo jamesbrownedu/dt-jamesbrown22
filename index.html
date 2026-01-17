@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>UGS Files - Master List</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGS Files</title>
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -9,87 +11,95 @@
             color: white;
             margin: 0;
             display: flex;
+            min-height: 100vh;
         }
 
-        /* Sidebar */
+        /* Sidebar Navigation */
         .sidebar {
             position: fixed;
             left: 0;
             top: 0;
-            width: 80px;
+            width: 70px;
             height: 100vh;
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(10px);
-            padding: 20px 10px;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 4px;
+            padding: 10px 5px;
             overflow-y: auto;
             z-index: 1000;
         }
 
-        .sidebar a {
+        .sidebar-btn {
             background: #5986da;
+            border: none;
             color: white;
-            text-decoration: none;
-            padding: 8px;
-            text-align: center;
-            border-radius: 5px;
+            padding: 8px 0;
+            font-size: 13px;
             font-weight: bold;
-            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
         }
 
-        .sidebar a:hover { background: #79aadb; }
+        .sidebar-btn:hover { background: #79aadb; transform: scale(1.05); }
 
-        /* Content */
+        /* Main Content */
         .main-content {
-            margin-left: 100px;
+            margin-left: 80px;
             padding: 40px;
+            flex-grow: 1;
+        }
+
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { font-size: 42px; margin-bottom: 10px; }
+        .header a { color: #79aadb; text-decoration: none; font-weight: bold; }
+
+        .search-container { text-align: center; margin-bottom: 30px; }
+        #search {
             width: 100%;
+            max-width: 500px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: none;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 16px;
         }
 
-        .header { text-align: center; margin-bottom: 50px; }
-        .header h1 { font-size: 40px; margin: 0; }
-        .header a { color: #79aadb; text-decoration: none; }
-
-        .letter-section {
-            margin-bottom: 40px;
-            border-top: 2px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-        }
-
+        .letter-section { margin-bottom: 50px; }
         .letter-header {
-            font-size: 32px;
-            font-weight: bold;
+            font-size: 30px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
             margin-bottom: 20px;
+            padding-bottom: 10px;
             color: #79aadb;
         }
 
-        /* The Grid */
         .game-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
+            gap: 12px;
         }
 
-        .game-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 12px;
-            border-radius: 6px;
+        .game-card {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 8px;
             text-align: center;
-            font-size: 14px;
-            transition: 0.2s;
-            cursor: pointer;
-            border: 1px solid transparent;
             text-decoration: none;
             color: white;
+            font-size: 14px;
+            transition: 0.2s;
+            border: 1px solid transparent;
             display: block;
+            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
         }
 
-        .game-item:hover {
+        .game-card:hover {
             background: #5986da;
             transform: translateY(-3px);
             border-color: #79aadb;
@@ -98,61 +108,127 @@
 </head>
 <body>
 
-    <div class="sidebar">
-        <a href="#num">#</a>
-        <a href="#A">A</a> <a href="#B">B</a> <a href="#C">C</a> <a href="#D">D</a>
-        <a href="#E">E</a> <a href="#F">F</a> <a href="#G">G</a> <a href="#H">H</a>
-        <a href="#I">I</a> <a href="#J">J</a> <a href="#K">K</a> <a href="#L">L</a>
-        <a href="#M">M</a> <a href="#N">N</a> <a href="#O">O</a> <a href="#P">P</a>
-        <a href="#Q">Q</a> <a href="#R">R</a> <a href="#S">S</a> <a href="#T">T</a>
-        <a href="#U">U</a> <a href="#V">V</a> <a href="#W">W</a> <a href="#X">X</a>
-        <a href="#Y">Y</a> <a href="#Z">Z</a>
-    </div>
+    <div class="sidebar" id="sidebar"></div>
 
     <div class="main-content">
         <div class="header">
             <h1>UGS Files</h1>
-            <p>From <a href="https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/" target="_blank">Ultimate Game Stash</a></p>
-            <p>Discord: <a href="https://discord.gg/rmVsAqkpkA" target="_blank">Join Here</a></p>
+            <p>Files from <a href="https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/" target="_blank">Ultimate Game Stash Google Doc</a></p>
+            <p>Discord Server: <a href="https://discord.gg/rmVsAqkpkA" target="_blank">https://discord.gg/rmVsAqkpkA</a></p>
         </div>
 
-        <div class="letter-section" id="num">
-            <div class="letter-header">#</div>
-            <div class="game-grid">
-                <a class="game-item">1</a><a class="game-item">10bullets</a><a class="game-item">10minutestildawn</a><a class="game-item">12minibattles</a><a class="game-item">1on1soccer</a><a class="game-item">1v1lol</a><a class="game-item">1v1tennis</a><a class="game-item">2048</a><a class="game-item">2048cupcakes</a><a class="game-item">2doom</a><a class="game-item">2dshooting</a><a class="game-item">3dash</a><a class="game-item">3pandas</a><a class="game-item">3pandasbrazil</a><a class="game-item">3pandasfantasy</a><a class="game-item">3pandasjapan</a><a class="game-item">3pandasnight</a><a class="game-item">3slices2</a><a class="game-item">40xescape</a><a class="game-item">4thandgoal</a><a class="game-item">500calibercontractz</a><a class="game-item">60secondsburgerrun</a><a class="game-item">60secondssantarun</a><a class="game-item">8ballclassic</a><a class="game-item">8ballpool</a><a class="game-item">9007199254740992</a><a class="game-item">99balls</a><a class="game-item">99nightsitf</a>
-            </div>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search games..." onkeyup="searchGames()">
         </div>
 
-        <div class="letter-section" id="A">
-            <div class="letter-header">A</div>
-            <div class="game-grid">
-                <a class="game-item">Abandoned3</a><a class="game-item">Absolutemadness</a><a class="game-item">Acecombat2</a><a class="game-item">Acecombat3</a><a class="game-item">Acegangstertaxi</a><a class="game-item">Achievementunlocked</a><a class="game-item">Achievmentunlocked</a><a class="game-item">Achievmentunlocked2</a><a class="game-item">Achievmentunlocked3</a><a class="game-item">Achillies</a><a class="game-item">Achillies2</a><a class="game-item">Adark Room</a><a class="game-item">Adayintheoffice</a><a class="game-item">Adofai</a><a class="game-item">Advancewars</a><a class="game-item">Advancewars2</a><a class="game-item">Adventneon</a><a class="game-item">Adventure Capatalist</a><a class="game-item">Adventurecapitalist</a><a class="game-item">Agariolite</a><a class="game-item">Ageofwar</a><a class="game-item">Ageofwar2</a><a class="game-item">Agesofconflict</a><a class="game-item">Ahoysurvival</a><a class="game-item">Ai</a><a class="game-item">Akoopasrevenge</a><a class="game-item">Akoopasrevenge2</a><a class="game-item">Akumanorgaiden</a><a class="game-item">Alienhominid</a><a class="game-item">Alienhominidgba</a><a class="game-item">Alienskyinvasion</a><a class="game-item">Alientransporter</a><a class="game-item">Alienvspredator</a><a class="game-item">Allbossesin1</a><a class="game-item">Allocation</a><a class="game-item">Amaze</a><a class="game-item">Amidstthesky</a><a class="game-item">Amigopancho</a><a class="game-item">Amigopancho2</a><a class="game-item">Amigopancho3</a><a class="game-item">Amigopancho4</a><a class="game-item">Amigopancho5</a><a class="game-item">Amigopancho6</a><a class="game-item">Amigopancho7</a><a class="game-item">Amongus</a><a class="game-item">Amorphous</a><a class="game-item">Ancientsins</a><a class="game-item">Angry Birdsspace</a><a class="game-item">Angrybirds Space</a><a class="game-item">Angrybirds</a><a class="game-item">Angrybirdsshowdown</a><a class="game-item">Angrybirdsspace</a><a class="game-item">Animalcrossingwildworld</a><a class="game-item">Anotherworld</a><a class="game-item">Apotris</a><a class="game-item">Appleshooter</a><a class="game-item">Appleworm</a><a class="game-item">Aquaparkio</a><a class="game-item">Arceuslegend</a><a class="game-item">Archeryworldtour</a><a class="game-item">Arena</a><a class="game-item">Armormayhem2</a><a class="game-item">Arsonate</a><a class="game-item">Ascent</a><a class="game-item">Asmallworldcup</a><a class="game-item">Assesmentexaminationque</a><a class="game-item">Asteroids</a><a class="game-item">Asteroids Alt</a><a class="game-item">Attackhole</a><a class="game-item">Avalanche</a><a class="game-item">Aviamasters</a><a class="game-item">Aviamastersbuggy</a><a class="game-item">Awesome Pirates</a><a class="game-item">Awesomeplanes</a><a class="game-item">Awesometanks</a><a class="game-item">Awesometanks2</a>
-            </div>
-        </div>
-
-        <div class="letter-section" id="B">
-            <div class="letter-header">B</div>
-            <div class="game-grid">
-                <a class="game-item">B3313</a><a class="game-item">Babeltower</a><a class="game-item">Babychiccoadventure</a><a class="game-item">Babykaizo</a><a class="game-item">Babysniperinvietnam</a><a class="game-item">Backrooms</a><a class="game-item">Backrooms2d</a><a class="game-item">Backyardbaseball</a><a class="game-item">Backyardbaseball09</a><a class="game-item">Backyardbaseball10</a><a class="game-item">Backyardsoccer</a><a class="game-item">Baconmaydie</a><a class="game-item">Badbodyguards</a><a class="game-item">Badicecream</a><a class="game-item">Badmondaysimulator</a><a class="game-item">Badparenting</a><a class="game-item">Badpiggies</a><a class="game-item">Badtimesim</a><a class="game-item">Badtimesimulator</a><a class="game-item">Baldidecomp</a><a class="game-item">Baldisbasics</a><a class="game-item">Baldisbasicsremaster</a><a class="game-item">Baldisfunnewschoolultimate</a><a class="game-item">Ballblast</a><a class="game-item">Ballsandbricks</a><a class="game-item">Ballsandbricksgood</a><a class="game-item">Bananasimulator</a><a class="game-item">Banditgunslingers</a><a class="game-item">Banjokazooie</a><a class="game-item">Banjotooie</a><a class="game-item">Bankbreakout2</a><a class="game-item">Bankrobbery2</a><a class="game-item">Barryhasasecret</a><a class="game-item">Bas</a><a class="game-item">Baseballbros</a><a class="game-item">Basketballfrvr</a><a class="game-item">Basketballlegends</a><a class="game-item">Basketballstars</a><a class="game-item">Basketbattle</a><a class="game-item">Basketbros</a><a class="game-item">Basketrandom</a><a class="game-item">Basketrandomgood</a><a class="game-item">Basketslamdunk2</a><a class="game-item">Batterup</a><a class="game-item">Battlekarts</a><a class="game-item">Battles</a><a class="game-item">Battlesim</a><a class="game-item">Battlezone</a><a class="game-item">Bazookaboy</a><a class="game-item">Bballlegend</a><a class="game-item">Beachboxingsim</a><a class="game-item">Beamrider</a><a class="game-item">Bearbarians</a><a class="game-item">Bearsus</a><a class="game-item">Ben10alienforce</a><a class="game-item">Ben10omniverse</a><a class="game-item">Ben10protector</a><a class="game-item">Ben10racing</a><a class="game-item">Ben10ultimatealien</a><a class="game-item">Bergentruck201x</a><a class="game-item">Bfdia5b</a><a class="game-item">Bigicetowertinysquare</a><a class="game-item">Bigneontowertinysquare</a><a class="game-item">Bigshotboxing2</a><a class="game-item">Bigtowertinysquare</a><a class="game-item">Bigtowertinysquare2</a><a class="game-item">Bigtowertinysquare2good</a><a class="game-item">Big Time Butter Baron</a><a class="game-item">Bindingofisaccsheeptime</a><a class="game-item">Bioevil4</a><a class="game-item">Bitlife</a><a class="game-item">Bitlifeencrypted</a><a class="game-item">Bitplanes</a><a class="game-item">Blackjack</a><a class="game-item">Blackjackbattle</a><a class="game-item">Blackjackhhhh</a><a class="game-item">Blacksmithlab</a><a class="game-item">Blastronaut</a><a class="game-item">Blazedrifter</a><a class="game-item">Bleachvsnaruto</a><a class="game-item">Blightborne</a><a class="game-item">Blobsstory2</a><a class="game-item">Blockblast</a><a class="game-item">Blockcraftparkour</a><a class="game-item">Blockcraftshooter</a><a class="game-item">Blockpost</a><a class="game-item">Blockthepig</a><a class="game-item">Blockydemolitionderby</a><a class="game-item">Blockysnakes</a><a class="game-item">Bloodmoney</a><a class="game-item">Bloodtournament</a><a class="game-item">Bloons</a><a class="game-item">Bloons2</a><a class="game-item">Bloonspp1</a><a class="game-item">Bloonspp2</a><a class="game-item">Bloonspp3</a><a class="game-item">Bloonspp4</a><a class="game-item">Bloonspp5</a><a class="game-item">Bloons Td1</a><a class="game-item">Bloons Td2</a><a class="game-item">Bloons Td3</a><a class="game-item">Bloons Td4</a><a class="game-item">Bloons Td5</a><a class="game-item">Bloons Td6scratch</a><a class="game-item">Bloxorz</a><a class="game-item">Blumgiracers</a><a class="game-item">Bmx2</a><a class="game-item">Bntts</a><a class="game-item">Bobtherobber</a><a class="game-item">Bobtherobber2</a><a class="game-item">Bobtherobber5</a><a class="game-item">Bollybeat</a><a class="game-item">Bomberman</a><a class="game-item">Bomberman2</a><a class="game-item">Bombermanhero</a><a class="game-item">Boomslingers</a><a class="game-item">Bottlecracks</a><a class="game-item">Bottleflip3d</a><a class="game-item">Bounceback</a><a class="game-item">Bouncemasters</a><a class="game-item">Bouncymotors</a><a class="game-item">Bounty Of One</a><a class="game-item">Bowlalt</a><a class="game-item">Boxhead2playrooms</a><a class="game-item">Boxheadnightmare</a><a class="game-item">Boxinglive 2</a><a class="game-item">Boxinglive2</a><a class="game-item">Boxingrandom</a><a class="game-item">Brainrot</a><a class="game-item">Bridgerace</a><a class="game-item">Btd1</a><a class="game-item">Btd5</a><a class="game-item">Btts</a><a class="game-item">Btts2</a><a class="game-item">Bubbleshooter</a><a class="game-item">Bubbleshooterpirate</a><a class="game-item">Bubbletanks</a><a class="game-item">Bubbletanks2</a><a class="game-item">Bubbletanks3</a><a class="game-item">Bubbletanksarenas</a><a class="game-item">Bubbletankstd</a><a class="game-item">Bubsy</a><a class="game-item">Buckshotroulette</a><a class="game-item">Buildnowgg</a><a class="game-item">Bunnyland</a><a class="game-item">Burgerandfrights</a><a class="game-item">Burritobison</a><a class="game-item">Burritobison2</a><a class="game-item">Burritobisonlaunchalibre</a><a class="game-item">Burritobisonrevenge</a><a class="game-item">Bushidoblade</a>
-            </div>
-        </div>
-
-        <div class="letter-section" id="C">
-            <div class="letter-header">C</div>
-            <div class="game-grid">
-                <a class="game-item">Cactusmccoy</a><a class="game-item">Cactusmccoy2</a><a class="game-item">Cannonballs3d</a><a class="game-item">Cannonfodder</a><a class="game-item">Capybaraclicker</a><a class="game-item">Carcrash3</a><a class="game-item">Cardrawing</a><a class="game-item">Careatscar2deluxe</a><a class="game-item">Carkingarena</a><a class="game-item">Carmods</a><a class="game-item">Carstuntsdriving</a><a class="game-item">Cartoon Network Table Tennis Ultimate Tournament</a><a class="game-item">Castlebloodline</a><a class="game-item">Castlecircleofmoon</a><a class="game-item">Castlevania</a><a class="game-item">Castlevania2</a><a class="game-item">Castlevania3</a><a class="game-item">Castlevaniaariaofsorrow</a><a class="game-item">Castlevaniadawnofsorrow</a><a class="game-item">Castlevanianes</a><a class="game-item">Castlewarsmodern</a><a class="game-item">Catmario</a><a class="game-item">Catmariogood</a><a class="game-item">Catslovecake2</a><a class="game-item">Cavestory</a><a class="game-item">Celeste</a><a class="game-item">Celeste2</a><a class="game-item">Cellardoor</a><a class="game-item">Chaosfaction2</a><a class="game-item">Checkers</a><a class="game-item">Cheesechompers3d</a><a class="game-item">Cheshireinachatroom</a><a class="game-item">Chess</a><a class="game-item">Chessclassic</a><a class="game-item">Chibiknight</a><a class="game-item">Chickenscream</a><a class="game-item">Chickenwar</a><a class="game-item">Chipschallenge</a><a class="game-item">Choppyorc</a><a class="game-item">Chronotrigger</a><a class="game-item">Chuzzle</a><a class="game-item">Circlo O2</a><a class="game-item">Civiballs</a><a class="game-item">Civiballs2</a><a class="game-item">Clashofvikings</a><a class="game-item">Classof09</a><a class="game-item">Cleanupio</a><a class="game-item">Clearvision</a><a class="game-item">Clearvision2</a><a class="game-item">Clearvision3</a><a class="game-item">Clearvision4</a><a class="game-item">Clearvision5</a><a class="game-item">Clmadnessambulation</a><a class="game-item">Clubbytheseal</a><a class="game-item">Clusterrush</a><a class="game-item">Coalllcdemo</a><a class="game-item">Cod4</a><a class="game-item">Codblackopp</a><a class="game-item">Coddefiance</a><a class="game-item">Codenamegordon</a><a class="game-item">Codmodernwarfare</a><a class="game-item">Codworldatwar</a><a class="game-item">Coffeemaker</a><a class="game-item">Colorburst3d</a><a class="game-item">Colormatch</a><a class="game-item">Colorwatersort3d</a><a class="game-item">Combopool</a><a class="game-item">Commanderkeen4</a><a class="game-item">Commanderkeen5</a><a class="game-item">Commanderkeen6</a><a class="game-item">Conkersbadfurday</a><a class="game-item">Contra</a><a class="game-item">Contra3</a><a class="game-item">Cookie Clicker</a><a class="game-item">Cookieclicker</a><a class="game-item">Cookieclickercool</a><a class="game-item">Cookieclickergood</a><a class="game-item">Cookingmama</a><a class="game-item">Cookingmama2</a><a class="game-item">Cookingmama3</a><a class="game-item">Coreball</a><a class="game-item">Cotlk</a><a class="game-item">Countmastersstickmangames</a><a class="game-item">Coverorange</a><a class="game-item">Coverorange2</a><a class="game-item">Coverorangejourneygangsters</a><a class="game-item">Coverorangejourneyknights</a><a class="game-item">Coverorangejourneypirates</a><a class="game-item">Coverorangejourneyspace</a><a class="game-item">Coverorangeplayerspack</a><a class="game-item">Coverorangeplayerspack2</a><a class="game-item">Coverorangeplayerspack3</a><a class="game-item">Crankit!</a><a class="game-item">Crashbandicoot</a><a class="game-item">Crashbandicoot2</a><a class="game-item">Crashteamracing</a><a class="game-item">Crazycars</a><a class="game-item">Crazycattle3d</a><a class="game-item">Crazychicken3d</a><a class="game-item">Crazyfrogracer</a><a class="game-item">Crazymotorcycle</a><a class="game-item">Creeperworld2</a><a class="game-item">Crossyroad</a><a class="game-item">Crunchball3000</a><a class="game-item">Cs1.6</a><a class="game-item">Csds</a><a class="game-item">Csgoclicker</a><a class="game-item">Ctgpnitro</a><a class="game-item">Curveball</a><a class="game-item">Cuttherope</a><a class="game-item">Cuttheropetimetravel</a><a class="game-item">Cyberbungracing</a><a class="game-item">Cybersensation</a>
-            </div>
-        </div>
-        
-        <div class="letter-section" id="P">
-            <div class="letter-header">P</div>
-            <div class="game-grid">
-                <a class="game-item">Pacman</a><a class="game-item">Pacmansuperfast</a><a class="game-item">Papabakeria</a><a class="game-item">Papadonut</a><a class="game-item">Papasburger</a><a class="game-item">Papasfreezeria</a><a class="game-item">Paperio</a><a class="game-item">Paperio3d</a><a class="game-item">Pepsiman</a><a class="game-item">Plantsvszombies</a><a class="game-item">Pizzatower</a><a class="game-item">Pokemonemerald</a><a class="game-item">Pokemonfirered</a><a class="game-item">Pou</a>
-            </div>
-        </div>
-
-        <p style="text-align: center; color: rgba(255,255,255,0.3);">[The list continues with all other names...]</p>
+        <div id="game-list-container">Loading list...</div>
     </div>
+
+<script>
+    // Full game list
+    const games = [
+        "1", "10bullets", "10minutestildawn", "12minibattles", "1on1soccer", "1v1lol", "1v1tennis", "2048", "2048cupcakes", "2doom", "2dshooting", "3dash", "3pandas", "3pandasbrazil", "3pandasfantasy", "3pandasjapan", "3pandasnight", "3slices2", "40xescape", "4thandgoal", "500calibercontractz", "60secondsburgerrun", "60secondssantarun", "8ballclassic", "8ballpool", "9007199254740992", "99balls", "99nightsitf",
+        "Abandoned3", "Absolutemadness", "Acecombat2", "Acecombat3", "Acegangstertaxi", "Achievementunlocked", "Achillies", "Adofai", "Advancewars", "Adventurecapitalist", "Ageofwar", "Agesofconflict", "Amongus", "Angrybirds", "Apotris", "Appleshooter", "Aquaparkio", "Awesometanks",
+        "Backrooms", "Backyardbaseball", "Baconmaydie", "Badicecream", "Badpiggies", "Baldisbasics", "Ballblast", "Basketrandom", "Basketbros", "Basketballstars", "Beamrider", "Ben10", "Bitlife", "Blockblast", "Bloons Td5", "Bloons Td6", "Bloxorz", "Bobtherobber", "Bomberman", "Bottleflip3d", "Boxhead2", "Boxingrandom", "Btd5", "Buckshotroulette", "Buildnowgg", "Burritobison",
+        "Cactusmccoy", "Capybaraclicker", "Castlevania", "Catmario", "Celeste", "Chess", "Chipschallenge", "Chronotrigger", "Civiballs", "Classof09", "Clusterrush", "Cod4", "Contra", "Cookieclicker", "Coreball", "Crossyroad", "Cs1.6", "Cuttherope",
+        "Dadnme", "Deadestate", "Deadplate", "Deadzed", "Decision", "Deltarune", "Diablo", "Digdug", "Dogeminer", "Donkeykong64", "Doom", "Doodlejump", "Dragonball", "Driftboss", "Ducklife4", "Dukenukem3d",
+        "Earntodie2", "Earthbound", "Earthwormjim", "Eggycar", "Electricman2", "Epicbattlefantasy5", "Escaperoad",
+        "Factoryballs", "Fancypants", "Feedus", "Fifa07", "Finalfantasy Vii", "Fireboyandwatergirl", "Fnaf", "Fnaf2", "Fnaf3", "Fnaf4", "Fridaynightfunkin", "Fruitninja", "Fzerox",
+        "Galaga", "Getawayshootout", "Getontop", "Gladdihoppers", "Goingballs", "Goldeneye007", "Goldminer", "Googlebaseball", "Googledino", "Granny", "Gta", "Gunblood", "Gunmayhem",
+        "Halflife", "Happywheels", "Hextris", "Hillclimbracing", "Hobo", "Holeio", "Hollowknight", "Houseofhazards",
+        "Idlebreakout", "Infinitecraft", "Interactivebuddy", "Intospace", "Ironsnout",
+        "Jacksmith", "Jetpackjoyride", "Johnnytrigger", "Justfalllol",
+        "Karlson", "Kirby", "Knifehit", "Knightmaretower",
+        "Laststand", "Learntofly", "Linerider", "Lozminishcap",
+        "Madalinstuntcars", "Madden99", "Madnesscombat", "Magictiles3", "Majorasmask", "Mariokart64", "Marioparty", "Megamanx", "Melonplayground", "Metalgearsolid", "Metroid", "Minecraft", "Minesweeper", "Mortalkombat", "Motox3m",
+        "N", "Nbajam", "Nfsunderground", "Nhlhitz", "Ninjabrawl",
+        "Ocarinaoftime", "Onlyup", "Osu", "Ovo",
+        "Pacman", "Papashotdoggeria", "Papasfreezeria", "Paperio", "Papermario", "Pepsiman", "Persona", "Piconightpunkin", "Picosschool", "Pizzatower", "Plantsvszombies", "Pokemonemerald", "Pokemonfirered", "Pokemonunbound", "Portal", "Pou", "Punchout", "Pvz",
+        "Quake", "Qwop",
+        "Radicalred", "Raftwars", "Ragdollhit", "Rayman", "Raze", "Rebuild", "Redball4", "Retrobowl", "Riddleschool", "Riddletransfer", "Rocketleague", "Rooftopsnipers", "Run3",
+        "Sandboxels", "Scarymazegame", "Scribblenauts", "Shift", "Shortlife", "Silenthill", "Slitherio", "Slope", "Smashkarts", "Snailbob", "Snowrider", "Soccerbros", "Soccerrandom", "Solarsmash", "Sonicadvance", "Sonic3complete", "Spaceinvaders", "Sprunki", "Stackballio", "Starfox64", "Stickmanhook", "Strikeforceheroes", "Subwaysurfers", "Suika", "Supermario64", "Supersmashflash2", "Swordsandsandals",
+        "Taikonotatsujin", "Takeover", "Tanukisunset", "Tecmobowl", "Templeofboom", "Templerun2", "Territorialio", "Tetris", "Theclassroom", "Thedeepestsleep"
+    ];
+
+    const container = document.getElementById('game-list-container');
+    const sidebar = document.getElementById('sidebar');
+
+    function init() {
+        container.innerHTML = "";
+        const organized = {};
+
+        // Group games by letter
+        games.forEach(game => {
+            let letter = game.charAt(0).toUpperCase();
+            if (!/[A-Z]/.test(letter)) letter = "#";
+            if (!organized[letter]) organized[letter] = [];
+            organized[letter].push(game);
+        });
+
+        // Create Sections
+        const sortedLetters = Object.keys(organized).sort((a, b) => {
+            if (a === "#") return -1;
+            if (b === "#") return 1;
+            return a.localeCompare(b);
+        });
+
+        sortedLetters.forEach(letter => {
+            // Sidebar button
+            const sBtn = document.createElement('button');
+            sBtn.className = 'sidebar-btn';
+            sBtn.innerText = letter;
+            sBtn.onclick = () => document.getElementById('sec-' + letter).scrollIntoView({behavior: 'smooth'});
+            sidebar.appendChild(sBtn);
+
+            // Page Section
+            const section = document.createElement('div');
+            section.className = 'letter-section';
+            section.id = 'sec-' + letter;
+
+            const header = document.createElement('div');
+            header.className = 'letter-header';
+            header.innerText = letter;
+            section.appendChild(header);
+
+            const grid = document.createElement('div');
+            grid.className = 'game-grid';
+
+            organized[letter].forEach(gameName => {
+                const card = document.createElement('a');
+                card.className = 'game-card';
+                card.innerText = gameName;
+                card.href = "files/" + gameName + ".html";
+                grid.appendChild(card);
+            });
+
+            section.appendChild(grid);
+            container.appendChild(section);
+        });
+    }
+
+    function searchGames() {
+        const query = document.getElementById('search').value.toLowerCase();
+        const cards = document.querySelectorAll('.game-card');
+        const sections = document.querySelectorAll('.letter-section');
+
+        sections.forEach(sec => {
+            let hasMatch = false;
+            const secCards = sec.querySelectorAll('.game-card');
+            secCards.forEach(card => {
+                if (card.innerText.toLowerCase().includes(query)) {
+                    card.style.display = "block";
+                    hasMatch = true;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+            sec.style.display = hasMatch ? "block" : "none";
+        });
+    }
+
+    // Start
+    init();
+</script>
 
 </body>
 </html>
