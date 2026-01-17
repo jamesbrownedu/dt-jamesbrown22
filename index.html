@@ -82,6 +82,7 @@
             padding: 15px;
             border-radius: 8px;
             text-align: center;
+            cursor: pointer;
             text-decoration: none;
             color: white;
             font-size: 14px;
@@ -107,7 +108,7 @@
     <div class="main-content">
         <div class="header">
             <h1>UGS Files</h1>
-            <p>Live Game Player</p>
+            <p>Unblocked Cloak Mode Active</p>
         </div>
 
         <div class="search-container">
@@ -127,6 +128,21 @@
 
     const container = document.getElementById('game-list-container');
     const sidebar = document.getElementById('sidebar');
+
+    function openCloaked(url) {
+        let win = window.open();
+        let iframe = win.document.createElement('iframe');
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.border = "none";
+        iframe.style.position = "fixed";
+        iframe.style.top = "0";
+        iframe.style.left = "0";
+        iframe.src = url;
+        win.document.body.style.margin = "0";
+        win.document.body.style.padding = "0";
+        win.document.body.appendChild(iframe);
+    }
 
     function init() {
         container.innerHTML = "";
@@ -165,15 +181,15 @@
             grid.className = 'game-grid';
 
             organized[letter].forEach(gameName => {
-                const card = document.createElement('a');
+                const card = document.createElement('div');
                 card.className = 'game-card';
                 card.innerText = gameName;
 
-                // Clean logic: lowcase, no space, no dots
                 let cleanName = gameName.toLowerCase().replace(/[\s\.]/g, '');
+                let gameUrl = "https://jamesbrownedu.github.io/dt-jamesbrown22/UGS-Files/cl" + cleanName + ".html";
                 
-                // THE EXACT URL STRUCTURE THAT WORKS
-                card.href = "https://jamesbrownedu.github.io/dt-jamesbrown22/UGS-Files/cl" + cleanName + ".html";
+                // Trigger the Cloak function on click
+                card.onclick = () => openCloaked(gameUrl);
                 
                 grid.appendChild(card);
             });
