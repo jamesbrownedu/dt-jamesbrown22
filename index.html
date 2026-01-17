@@ -77,13 +77,13 @@
             gap: 12px;
         }
 
+        /* CHANGED TO DIV STYLE TO PREVENT LINK DEFAULTS */
         .game-card {
             background: rgba(255,255,255,0.05);
             padding: 15px;
             border-radius: 8px;
             text-align: center;
             cursor: pointer;
-            text-decoration: none;
             color: white;
             font-size: 14px;
             border: 1px solid transparent;
@@ -108,14 +108,14 @@
     <div class="main-content">
         <div class="header">
             <h1>UGS Files</h1>
-            <p>Unblocked Cloak Mode Active</p>
+            <p>Forced Live Mode (No Blobs)</p>
         </div>
 
         <div class="search-container">
             <input type="text" id="search" placeholder="Search games..." onkeyup="searchGames()">
         </div>
 
-        <div id="game-list-container">Loading games...</div>
+        <div id="game-list-container">Loading...</div>
     </div>
 
 <script>
@@ -131,6 +131,10 @@
 
     function openCloaked(url) {
         let win = window.open();
+        if (!win || win.closed) {
+            alert("Please allow pop-ups to open games!");
+            return;
+        }
         let iframe = win.document.createElement('iframe');
         iframe.style.width = "100%";
         iframe.style.height = "100%";
@@ -138,9 +142,9 @@
         iframe.style.position = "fixed";
         iframe.style.top = "0";
         iframe.style.left = "0";
+        // FORCING THE .IO PRODUCTION LINK
         iframe.src = url;
         win.document.body.style.margin = "0";
-        win.document.body.style.padding = "0";
         win.document.body.appendChild(iframe);
     }
 
@@ -181,14 +185,14 @@
             grid.className = 'game-grid';
 
             organized[letter].forEach(gameName => {
-                const card = document.createElement('div');
+                const card = document.createElement('div'); // Forced Div
                 card.className = 'game-card';
                 card.innerText = gameName;
 
                 let cleanName = gameName.toLowerCase().replace(/[\s\.]/g, '');
+                // ABSOLUTE .IO URL (No Blobs)
                 let gameUrl = "https://jamesbrownedu.github.io/dt-jamesbrown22/UGS-Files/cl" + cleanName + ".html";
                 
-                // Trigger the Cloak function on click
                 card.onclick = () => openCloaked(gameUrl);
                 
                 grid.appendChild(card);
