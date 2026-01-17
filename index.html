@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UGS Files - Repo Access</title>
+    <title>UGS Files - Repo View</title>
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -107,7 +107,7 @@
     <div class="main-content">
         <div class="header">
             <h1>UGS Files</h1>
-            <p>Direct GitHub Repo Access</p>
+            <p>Structure: Repo Blob View</p>
         </div>
 
         <div class="search-container">
@@ -169,10 +169,11 @@
                 card.className = 'game-card';
                 card.innerText = gameName;
 
-                // Clean the name: lowercase, no spaces, no dots
+                // CLEANING: lower, no space, no dot
                 let cleanName = gameName.toLowerCase().replace(/[\s\.]/g, '');
                 
-                // INTEGRATED BLOB URL
+                // --- THE EXACT BLOB STRUCTURE ---
+                // This link goes to github.com NOT github.io
                 card.href = "https://github.com/jamesbrownedu/dt-jamesbrown22/blob/main/UGS-Files/cl" + cleanName + ".html";
                 
                 grid.appendChild(card);
