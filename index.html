@@ -110,7 +110,7 @@
     <div class="main-content">
         <div class="header">
             <h1>UGS Files</h1>
-            <p>Discord: <a href="https://discord.gg/rmVsAqkpkA" style="color:#79aadb">Join Here</a></p>
+            <p>Discord: <a href="https://discord.gg/rmVsAqkpkA" target="_blank" style="color:#79aadb">Join Here</a></p>
         </div>
 
         <div class="search-container">
@@ -175,14 +175,11 @@
                 card.className = 'game-card';
                 card.innerText = gameName;
                 
-                // FINAL VERIFIED URL LOGIC
-                // 1. Lowercase
-                // 2. Remove Spaces
-                // 3. Remove Dots (for 1v1.lol -> cl1v1lol.html)
+                // Final Name Cleaner (Lowercases, Removes Spaces, Removes Dots)
                 let cleanName = gameName.toLowerCase().replace(/[\s\.]/g, '');
                 
-                // Moves OUT of /files/ and INTO /UGS-Files/
-                card.href = "../UGS-Files/cl" + cleanName + ".html";
+                // FORCING THE GITHUB BLOB URL (Code View)
+                card.href = "https://github.com/jamesbrownedu/dt-jamesbrown22/blob/main/UGS-Files/cl" + cleanName + ".html";
                 
                 grid.appendChild(card);
             });
