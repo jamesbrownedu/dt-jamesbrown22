@@ -1,168 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UGS Files</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #2e3244 0%, #36224b 100%);
-            color: white;
-            margin: 0;
-            display: flex;
-            min-height: 100vh;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UGS Files</title>
 
-        .sidebar {
-            position: fixed; left: 0; top: 0; width: 70px; height: 100vh;
-            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px);
-            display: flex; flex-direction: column; gap: 4px; padding: 10px 5px;
-            overflow-y: auto; z-index: 1000;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #2e3244, #36224b);
+    color: white;
+    display: flex;
+    min-height: 100vh;
+}
 
-        .sidebar-btn {
-            background: #5986da; border: none; color: white; padding: 8px 0;
-            font-size: 13px; font-weight: bold; border-radius: 4px; cursor: pointer;
-        }
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 70px;
+    height: 100vh;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(10px);
+    padding: 8px 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow-y: auto;
+    z-index: 1000;
+}
 
-        .main-content { margin-left: 80px; padding: 40px; flex-grow: 1; }
+.sidebar-btn {
+    background: #5986da;
+    border: none;
+    color: white;
+    padding: 8px 0;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.15s;
+}
 
-        .header { text-align: center; margin-bottom: 40px; }
+.sidebar-btn:hover {
+    background: #79aadb;
+}
 
-        .search-container { text-align: center; margin-bottom: 30px; }
-        #search {
-            width: 100%; max-width: 500px; padding: 12px 20px; border-radius: 25px;
-            border: none; background: rgba(255,255,255,0.1); color: white;
-            font-size: 16px; outline: none;
-        }
+/* Main */
+.main {
+    margin-left: 80px;
+    padding: 40px;
+    width: 100%;
+}
 
-        .letter-section { margin-bottom: 50px; }
-        .letter-header {
-            font-size: 30px; border-bottom: 2px solid rgba(255,255,255,0.2);
-            margin-bottom: 20px; color: #79aadb;
-        }
+.header {
+    text-align: center;
+    margin-bottom: 35px;
+}
 
-        .game-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;
-        }
+.search-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 35px;
+}
 
-        .game-card {
-            background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px;
-            text-align: center; cursor: pointer; color: white; font-size: 14px;
-            border: 1px solid transparent; display: block; white-space: nowrap;
-            overflow: hidden; text-overflow: ellipsis; transition: 0.15s ease-in-out;
-        }
+#search {
+    width: 100%;
+    max-width: 520px;
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: none;
+    background: rgba(255,255,255,0.12);
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
 
-        .game-card:hover { background: #5986da; border-color: #79aadb; transform: scale(1.03); }
-    </style>
+/* Sections */
+.letter-section {
+    margin-bottom: 55px;
+}
+
+.letter-header {
+    font-size: 30px;
+    color: #79aadb;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+    margin-bottom: 18px;
+}
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.game-card {
+    background: rgba(255,255,255,0.07);
+    padding: 14px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: 0.15s ease;
+    border: 1px solid transparent;
+}
+
+.game-card:hover {
+    background: #5986da;
+    border-color: #79aadb;
+    transform: scale(1.03);
+}
+</style>
 </head>
+
 <body>
 
-    <div class="sidebar" id="sidebar"></div>
+<div class="sidebar" id="sidebar"></div>
 
-    <div class="main-content">
-        <div class="header">
-            <h1>UGS Files</h1>
-            <p>Direct Live Injection (No Blobs)</p>
-        </div>
-
-        <div class="search-container">
-            <input type="text" id="search" placeholder="Search games..." onkeyup="searchGames()">
-        </div>
-
-        <div id="game-list-container">Loading...</div>
+<div class="main">
+    <div class="header">
+        <h1>UGS Files</h1>
+        <p>Direct Live Injection (No Blob Links)</p>
     </div>
 
+    <div class="search-box">
+        <input id="search" placeholder="Search games..." onkeyup="searchGames()">
+    </div>
+
+    <div id="game-container">Loading...</div>
+</div>
+
 <script>
-    const games = [
-        "1", "10 Bullets", "10 Minutes Til Dawn", "12 Mini Battles", "1 On 1 Soccer", "1v1.lol", "1v1 Tennis", "2048", "2048 Cupcakes", "2 Doom", "2D Shooting", "3 Dash", "3 Pandas", "3 Pandas Brazil", "3 Pandas Fantasy", "3 Pandas Japan", "3 Pandas Night", "3 Slices 2", "40x Escape", "4th and Goal", "500 Caliber Contractz", "60 Seconds Burger Run", "60 Seconds Santa Run", "8 Ball Classic", "8 Ball Pool", "9007199254740992", "99 Balls", "99 Nights ITF",
-        "Abandoned 3", "Absolute Madness", "Ace Combat 2", "Ace Combat 3", "Ace Gangster Taxi", "Achievement Unlocked", "Achillies", "Achillies 2", "Adark Room", "A Day In The Office", "Adofai", "Advance Wars", "Advance Wars 2", "Advent Neon", "Adventure Capitalist", "Agariolite", "Age of War", "Age of War 2", "Ages of Conflict", "Ahoy Survival", "Ai", "Akoopas Revenge", "Akoopas Revenge 2", "Akumanor Gaiden", "Alien Hominid", "Alien Hominid GBA", "Alien Sky Invasion", "Alien Transporter", "Alien vs Predator", "All Bosses in 1", "Allocation", "Amaze", "Amidst The Sky", "Amigo Pancho", "Amigo Pancho 2", "Amigo Pancho 3", "Amigo Pancho 4", "Amigo Pancho 5", "Amigo Pancho 6", "Amigo Pancho 7", "Among Us", "Amorphous", "Ancient Sins", "Angry Birds Space", "Angry Birds", "Angry Birds Showdown", "Animal Crossing Wild World", "Another World", "Apotris", "Apple Shooter", "Apple Worm", "Aquapark.io", "Arceus Legend", "Archery World Tour", "Arena", "Armor Mayhem 2", "Arsonate", "Ascent", "A Small World Cup", "Assesment Examination Que", "Asteroids", "Attack Hole", "Avalanche", "Avia Masters", "Awesome Pirates", "Awesome Planes", "Awesome Tanks", "Awesome Tanks 2",
-        "B3313", "Babel Tower", "Baby Chicco Adventure", "Baby Kaizo", "Baby Sniper In Vietnam", "Backrooms", "Backrooms 2D", "Backyard Baseball", "Bacon May Die", "Bad Bodyguards", "Bad Ice Cream", "Bad Monday Simulator", "Bad Parenting", "Bad Piggies", "Bad Time Sim", "Baldi Decomp", "Baldis Basics", "Baldis Basics Remaster", "Ball Blast", "Balls and Bricks", "Banana Simulator", "Bandit Gunslingers", "Banjo Kazooie", "Banjo Tooie", "Bank Breakout 2", "Bank Robbery 2", "Barry Has A Secret", "Baseball Bros", "Basketball FRVR", "Basketball Legends", "Basketball Stars", "Basket Battle", "Basket Bros", "Basket Random", "Basket Slam Dunk 2", "Batter Up", "Battle Karts", "Battles", "Battle Zone", "Bazooka Boy", "Beach Boxing Sim", "Beam Rider", "Bearbarians", "Bearsus", "Ben 10 Alien Force", "Ben 10 Omniverse", "Ben 10 Protector", "Ben 10 Racing", "Ben 10 Ultimate Alien", "Bergentruck 201x", "Bfdia 5b", "Big Ice Tower Tiny Square", "Big Neon Tower Tiny Square", "Big Shot Boxing 2", "Big Tower Tiny Square", "Big Tower Tiny Square 2", "Big Time Butter Baron", "Binding of Isacc Sheeptime", "Bio Evil 4", "Bitlife", "Bitlife Encrypted", "Bitplanes", "Blackjack", "Blacksmith Lab", "Blastronaut", "Blaze Drifter", "Bleach vs Naruto", "Blightborne", "Blobs Story 2", "Block Blast", "Block Craft Parkour", "Block Craft Shooter", "Block Post", "Block The Pig", "Blocky Demolition Derby", "Blocky Snakes", "Blood Money", "Blood Tournament", "Bloons", "Bloons 2", "Bloons PP1", "Bloons PP2", "Bloons PP3", "Bloons PP4", "Bloons PP5", "Bloons TD1", "Bloons TD2", "Bloons TD3", "Bloons TD4", "Bloons TD5", "Bloons TD6", "Bloxorz", "Blumgi Racers", "Bmx 2", "Bob The Robber", "Bob The Robber 2", "Bob The Robber 5", "Bolly Beat", "Bomberman", "Bomberman 2", "Bomberman Hero", "Boom Slingers", "Bottle Cracks", "Bottle Flip 3D", "Bounce Back", "Bounce Masters", "Bouncy Motors", "Bounty of One", "Bowl Alt", "Boxhead 2 Playrooms", "Boxhead Nightmare", "Boxing Live 2", "Boxing Random", "Brainrot", "Bridge Race", "BTD 1", "BTD 5", "Bubbleshooter", "Bubble Tanks", "Bubble Tanks 2", "Bubble Tanks 3", "Bubble Tanks Arenas", "Bubble Tanks TD", "Bubsy", "Buckshot Roulette", "Build Now GG", "Bunnyland", "Burger and Frights", "Burrito Bison", "Burrito Bison Revenge", "Burrito Bison Launcha Libre", "Bushido Blade",
-        "Cactus Mccoy", "Cactus Mccoy 2", "Cannonballs 3D", "Cannon Fodder", "Capybara Clicker", "Car Crash 3", "Car Drawing", "Car Eat Car 2 Deluxe", "Car King Arena", "Car Mods", "Car Stunts Driving", "Castle Bloodline", "Castlevania", "Cat Mario", "Celeste", "Chess", "Chrome Dino", "Cookie Clicker", "Coreball", "Crossy Road", "CS 1.6", "Cut The Rope"
-    ];
+const games = [
+    "1", "10 Bullets", "10 Minutes Til Dawn", "12 Mini Battles",
+    "2048", "8 Ball Pool", "Among Us", "Bad Ice Cream",
+    "Basketball Stars", "Bitlife", "Bloons TD6", "Bloxorz",
+    "Celeste", "Chess", "Cookie Clicker", "Crossy Road",
+    "Cut The Rope"
+];
 
-    const container = document.getElementById('game-list-container');
-    const sidebar = document.getElementById('sidebar');
+/* OPEN GAME (NO BLOBS) */
+function openCloaked(url) {
+    const win = window.open("about:blank");
+    if (!win) return;
 
-    function openCloaked(url) {
-        let win = window.open();
-        if (!win) return;
-        win.document.body.style.margin = "0";
-        win.document.body.style.height = "100vh";
-        let iframe = win.document.createElement('iframe');
-        iframe.style.width = "100%"; iframe.style.height = "100%";
-        iframe.style.border = "none";
-        iframe.src = url;
-        win.document.body.appendChild(iframe);
-    }
+    win.document.open();
+    win.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <title>UGS Game</title>
+        <style>
+            html,body { margin:0; height:100%; background:black; }
+            iframe { width:100%; height:100%; border:none; }
+        </style>
+        </head>
+        <body>
+            <iframe src="${url}" allowfullscreen></iframe>
+        </body>
+        </html>
+    `);
+    win.document.close();
+}
 
-    function init() {
-        container.innerHTML = "";
-        const organized = {};
+const container = document.getElementById("game-container");
+const sidebar = document.getElementById("sidebar");
 
-        games.forEach(game => {
-            let letter = game.charAt(0).toUpperCase();
-            if (!/[A-Z]/.test(letter)) letter = "#";
-            if (!organized[letter]) organized[letter] = [];
-            organized[letter].push(game);
+function normalize(name) {
+    return name.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function init() {
+    container.innerHTML = "";
+    sidebar.innerHTML = "";
+
+    const grouped = {};
+
+    games.forEach(game => {
+        let letter = game[0].toUpperCase();
+        if (!/[A-Z]/.test(letter)) letter = "#";
+        if (!grouped[letter]) grouped[letter] = [];
+        grouped[letter].push(game);
+    });
+
+    Object.keys(grouped).sort().forEach(letter => {
+        const btn = document.createElement("button");
+        btn.className = "sidebar-btn";
+        btn.textContent = letter;
+        btn.onclick = () =>
+            document.getElementById("sec-" + letter)
+            .scrollIntoView({ behavior: "smooth" });
+        sidebar.appendChild(btn);
+
+        const section = document.createElement("div");
+        section.className = "letter-section";
+        section.id = "sec-" + letter;
+
+        section.innerHTML = `<div class="letter-header">${letter}</div>`;
+        const grid = document.createElement("div");
+        grid.className = "game-grid";
+
+        grouped[letter].forEach(game => {
+            const card = document.createElement("div");
+            card.className = "game-card";
+            card.textContent = game;
+
+            const file = normalize(game);
+            const url =
+              `https://cdn.jsdelivr.net/gh/jamesbrownedu/dt-jamesbrown22@main/UGS-Files/cl${file}.html`;
+
+            card.onclick = () => openCloaked(url);
+            grid.appendChild(card);
         });
 
-        const sortedLetters = Object.keys(organized).sort((a, b) => {
-            if (a === "#") return -1;
-            if (b === "#") return 1;
-            return a.localeCompare(b);
+        section.appendChild(grid);
+        container.appendChild(section);
+    });
+}
+
+function searchGames() {
+    const q = search.value.toLowerCase();
+    document.querySelectorAll(".letter-section").forEach(sec => {
+        let show = false;
+        sec.querySelectorAll(".game-card").forEach(card => {
+            const match = card.textContent.toLowerCase().includes(q);
+            card.style.display = match ? "block" : "none";
+            if (match) show = true;
         });
+        sec.style.display = show ? "block" : "none";
+    });
+}
 
-        sortedLetters.forEach(letter => {
-            const sBtn = document.createElement('button');
-            sBtn.className = 'sidebar-btn';
-            sBtn.innerText = letter;
-            sBtn.onclick = () => document.getElementById('sec-' + letter).scrollIntoView({behavior: 'smooth'});
-            sidebar.appendChild(sBtn);
-
-            const section = document.createElement('div');
-            section.className = 'letter-section';
-            section.id = 'sec-' + letter;
-            section.innerHTML = `<div class="letter-header">${letter}</div>`;
-
-            const grid = document.createElement('div');
-            grid.className = 'game-grid';
-
-            organized[letter].forEach(gameName => {
-                const card = document.createElement('div');
-                card.className = 'game-card';
-                card.innerText = gameName;
-                
-                let cleanName = gameName.toLowerCase().replace(/[\s\.]/g, '');
-                let gameUrl = `https://jamesbrownedu.github.io/dt-jamesbrown22/UGS-Files/cl${cleanName}.html`;
-                
-                card.onclick = () => openCloaked(gameUrl);
-                grid.appendChild(card);
-            });
-
-            section.appendChild(grid);
-            container.appendChild(section);
-        });
-    }
-
-    function searchGames() {
-        const query = document.getElementById('search').value.toLowerCase();
-        document.querySelectorAll('.letter-section').forEach(sec => {
-            let hasMatch = false;
-            sec.querySelectorAll('.game-card').forEach(card => {
-                if (card.innerText.toLowerCase().includes(query)) {
-                    card.style.display = "block";
-                    hasMatch = true;
-                } else {
-                    card.style.display = "none";
-                }
-            });
-            sec.style.display = hasMatch ? "block" : "none";
-        });
-    }
-
-    init();
+init();
 </script>
+
 </body>
 </html>
