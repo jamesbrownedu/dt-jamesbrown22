@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UGS Files - Repo View</title>
+    <title>UGS Files</title>
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -90,13 +90,13 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            transition: 0.2s;
+            transition: 0.15s ease-in-out;
         }
 
         .game-card:hover {
             background: #5986da;
             border-color: #79aadb;
-            transform: translateY(-2px);
+            transform: scale(1.03);
         }
     </style>
 </head>
@@ -107,14 +107,14 @@
     <div class="main-content">
         <div class="header">
             <h1>UGS Files</h1>
-            <p>Structure: Repo Blob View</p>
+            <p>Live Game Player</p>
         </div>
 
         <div class="search-container">
             <input type="text" id="search" placeholder="Search games..." onkeyup="searchGames()">
         </div>
 
-        <div id="game-list-container">Loading...</div>
+        <div id="game-list-container">Loading games...</div>
     </div>
 
 <script>
@@ -169,12 +169,11 @@
                 card.className = 'game-card';
                 card.innerText = gameName;
 
-                // CLEANING: lower, no space, no dot
+                // Clean logic: lowcase, no space, no dots
                 let cleanName = gameName.toLowerCase().replace(/[\s\.]/g, '');
                 
-                // --- THE EXACT BLOB STRUCTURE ---
-                // This link goes to github.com NOT github.io
-                card.href = "https://github.com/jamesbrownedu/dt-jamesbrown22/blob/main/UGS-Files/cl" + cleanName + ".html";
+                // THE EXACT URL STRUCTURE THAT WORKS
+                card.href = "https://jamesbrownedu.github.io/dt-jamesbrown22/UGS-Files/cl" + cleanName + ".html";
                 
                 grid.appendChild(card);
             });
