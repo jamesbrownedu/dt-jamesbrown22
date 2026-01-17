@@ -15,90 +15,46 @@
         }
 
         .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 70px;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(10px);
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            padding: 10px 5px;
-            overflow-y: auto;
-            z-index: 1000;
+            position: fixed; left: 0; top: 0; width: 70px; height: 100vh;
+            background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px);
+            display: flex; flex-direction: column; gap: 4px; padding: 10px 5px;
+            overflow-y: auto; z-index: 1000;
         }
 
         .sidebar-btn {
-            background: #5986da;
-            border: none;
-            color: white;
-            padding: 8px 0;
-            font-size: 13px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
+            background: #5986da; border: none; color: white; padding: 8px 0;
+            font-size: 13px; font-weight: bold; border-radius: 4px; cursor: pointer;
         }
 
-        .main-content {
-            margin-left: 80px;
-            padding: 40px;
-            flex-grow: 1;
-        }
+        .main-content { margin-left: 80px; padding: 40px; flex-grow: 1; }
 
         .header { text-align: center; margin-bottom: 40px; }
-        .header h1 { font-size: 42px; margin-bottom: 10px; }
 
         .search-container { text-align: center; margin-bottom: 30px; }
         #search {
-            width: 100%;
-            max-width: 500px;
-            padding: 12px 20px;
-            border-radius: 25px;
-            border: none;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            font-size: 16px;
-            outline: none;
+            width: 100%; max-width: 500px; padding: 12px 20px; border-radius: 25px;
+            border: none; background: rgba(255,255,255,0.1); color: white;
+            font-size: 16px; outline: none;
         }
 
         .letter-section { margin-bottom: 50px; }
         .letter-header {
-            font-size: 30px;
-            border-bottom: 2px solid rgba(255,255,255,0.2);
-            margin-bottom: 20px;
-            color: #79aadb;
+            font-size: 30px; border-bottom: 2px solid rgba(255,255,255,0.2);
+            margin-bottom: 20px; color: #79aadb;
         }
 
         .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 12px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;
         }
 
-        /* CHANGED TO DIV STYLE TO PREVENT LINK DEFAULTS */
         .game-card {
-            background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            color: white;
-            font-size: 14px;
-            border: 1px solid transparent;
-            display: block;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            transition: 0.15s ease-in-out;
+            background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px;
+            text-align: center; cursor: pointer; color: white; font-size: 14px;
+            border: 1px solid transparent; display: block; white-space: nowrap;
+            overflow: hidden; text-overflow: ellipsis; transition: 0.15s ease-in-out;
         }
 
-        .game-card:hover {
-            background: #5986da;
-            border-color: #79aadb;
-            transform: scale(1.03);
-        }
+        .game-card:hover { background: #5986da; border-color: #79aadb; transform: scale(1.03); }
     </style>
 </head>
 <body>
@@ -108,7 +64,7 @@
     <div class="main-content">
         <div class="header">
             <h1>UGS Files</h1>
-            <p>Forced Live Mode (No Blobs)</p>
+            <p>Direct Live Injection (No Blobs)</p>
         </div>
 
         <div class="search-container">
@@ -131,20 +87,13 @@
 
     function openCloaked(url) {
         let win = window.open();
-        if (!win || win.closed) {
-            alert("Please allow pop-ups to open games!");
-            return;
-        }
-        let iframe = win.document.createElement('iframe');
-        iframe.style.width = "100%";
-        iframe.style.height = "100%";
-        iframe.style.border = "none";
-        iframe.style.position = "fixed";
-        iframe.style.top = "0";
-        iframe.style.left = "0";
-        // FORCING THE .IO PRODUCTION LINK
-        iframe.src = url;
+        if (!win) return;
         win.document.body.style.margin = "0";
+        win.document.body.style.height = "100vh";
+        let iframe = win.document.createElement('iframe');
+        iframe.style.width = "100%"; iframe.style.height = "100%";
+        iframe.style.border = "none";
+        iframe.src = url;
         win.document.body.appendChild(iframe);
     }
 
@@ -175,26 +124,20 @@
             const section = document.createElement('div');
             section.className = 'letter-section';
             section.id = 'sec-' + letter;
-
-            const header = document.createElement('div');
-            header.className = 'letter-header';
-            header.innerText = letter;
-            section.appendChild(header);
+            section.innerHTML = `<div class="letter-header">${letter}</div>`;
 
             const grid = document.createElement('div');
             grid.className = 'game-grid';
 
             organized[letter].forEach(gameName => {
-                const card = document.createElement('div'); // Forced Div
+                const card = document.createElement('div');
                 card.className = 'game-card';
                 card.innerText = gameName;
-
+                
                 let cleanName = gameName.toLowerCase().replace(/[\s\.]/g, '');
-                // ABSOLUTE .IO URL (No Blobs)
-                let gameUrl = "https://jamesbrownedu.github.io/dt-jamesbrown22/UGS-Files/cl" + cleanName + ".html";
+                let gameUrl = `https://jamesbrownedu.github.io/dt-jamesbrown22/UGS-Files/cl${cleanName}.html`;
                 
                 card.onclick = () => openCloaked(gameUrl);
-                
                 grid.appendChild(card);
             });
 
