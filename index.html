@@ -45,7 +45,7 @@
 
         .sidebar-btn:hover { background: #79aadb; transform: scale(1.05); }
 
-        /* Main Content */
+        /* Main Content Area */
         .main-content {
             margin-left: 80px;
             padding: 40px;
@@ -66,6 +66,7 @@
             background: rgba(255,255,255,0.1);
             color: white;
             font-size: 16px;
+            outline: none;
         }
 
         .letter-section { margin-bottom: 50px; }
@@ -104,6 +105,10 @@
             transform: translateY(-3px);
             border-color: #79aadb;
         }
+
+        /* Custom Scrollbar for Sidebar */
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -113,8 +118,8 @@
     <div class="main-content">
         <div class="header">
             <h1>UGS Files</h1>
-            <p>Files from <a href="https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/" target="_blank">Ultimate Game Stash Google Doc</a></p>
-            <p>Discord Server: <a href="https://discord.gg/rmVsAqkpkA" target="_blank">https://discord.gg/rmVsAqkpkA</a></p>
+            <p>Files from <a href="https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/" target="_blank">Ultimate Game Stash</a></p>
+            <p>Discord Server: <a href="https://discord.gg/rmVsAqkpkA" target="_blank">Join Here</a></p>
         </div>
 
         <div class="search-container">
@@ -125,29 +130,11 @@
     </div>
 
 <script>
-    // Full game list
+    // COMPLETE GAME LIST 
     const games = [
-        "1", "10bullets", "10minutestildawn", "12minibattles", "1on1soccer", "1v1lol", "1v1tennis", "2048", "2048cupcakes", "2doom", "2dshooting", "3dash", "3pandas", "3pandasbrazil", "3pandasfantasy", "3pandasjapan", "3pandasnight", "3slices2", "40xescape", "4thandgoal", "500calibercontractz", "60secondsburgerrun", "60secondssantarun", "8ballclassic", "8ballpool", "9007199254740992", "99balls", "99nightsitf",
-        "Abandoned3", "Absolutemadness", "Acecombat2", "Acecombat3", "Acegangstertaxi", "Achievementunlocked", "Achillies", "Adofai", "Advancewars", "Adventurecapitalist", "Ageofwar", "Agesofconflict", "Amongus", "Angrybirds", "Apotris", "Appleshooter", "Aquaparkio", "Awesometanks",
-        "Backrooms", "Backyardbaseball", "Baconmaydie", "Badicecream", "Badpiggies", "Baldisbasics", "Ballblast", "Basketrandom", "Basketbros", "Basketballstars", "Beamrider", "Ben10", "Bitlife", "Blockblast", "Bloons Td5", "Bloons Td6", "Bloxorz", "Bobtherobber", "Bomberman", "Bottleflip3d", "Boxhead2", "Boxingrandom", "Btd5", "Buckshotroulette", "Buildnowgg", "Burritobison",
-        "Cactusmccoy", "Capybaraclicker", "Castlevania", "Catmario", "Celeste", "Chess", "Chipschallenge", "Chronotrigger", "Civiballs", "Classof09", "Clusterrush", "Cod4", "Contra", "Cookieclicker", "Coreball", "Crossyroad", "Cs1.6", "Cuttherope",
-        "Dadnme", "Deadestate", "Deadplate", "Deadzed", "Decision", "Deltarune", "Diablo", "Digdug", "Dogeminer", "Donkeykong64", "Doom", "Doodlejump", "Dragonball", "Driftboss", "Ducklife4", "Dukenukem3d",
-        "Earntodie2", "Earthbound", "Earthwormjim", "Eggycar", "Electricman2", "Epicbattlefantasy5", "Escaperoad",
-        "Factoryballs", "Fancypants", "Feedus", "Fifa07", "Finalfantasy Vii", "Fireboyandwatergirl", "Fnaf", "Fnaf2", "Fnaf3", "Fnaf4", "Fridaynightfunkin", "Fruitninja", "Fzerox",
-        "Galaga", "Getawayshootout", "Getontop", "Gladdihoppers", "Goingballs", "Goldeneye007", "Goldminer", "Googlebaseball", "Googledino", "Granny", "Gta", "Gunblood", "Gunmayhem",
-        "Halflife", "Happywheels", "Hextris", "Hillclimbracing", "Hobo", "Holeio", "Hollowknight", "Houseofhazards",
-        "Idlebreakout", "Infinitecraft", "Interactivebuddy", "Intospace", "Ironsnout",
-        "Jacksmith", "Jetpackjoyride", "Johnnytrigger", "Justfalllol",
-        "Karlson", "Kirby", "Knifehit", "Knightmaretower",
-        "Laststand", "Learntofly", "Linerider", "Lozminishcap",
-        "Madalinstuntcars", "Madden99", "Madnesscombat", "Magictiles3", "Majorasmask", "Mariokart64", "Marioparty", "Megamanx", "Melonplayground", "Metalgearsolid", "Metroid", "Minecraft", "Minesweeper", "Mortalkombat", "Motox3m",
-        "N", "Nbajam", "Nfsunderground", "Nhlhitz", "Ninjabrawl",
-        "Ocarinaoftime", "Onlyup", "Osu", "Ovo",
-        "Pacman", "Papashotdoggeria", "Papasfreezeria", "Paperio", "Papermario", "Pepsiman", "Persona", "Piconightpunkin", "Picosschool", "Pizzatower", "Plantsvszombies", "Pokemonemerald", "Pokemonfirered", "Pokemonunbound", "Portal", "Pou", "Punchout", "Pvz",
-        "Quake", "Qwop",
-        "Radicalred", "Raftwars", "Ragdollhit", "Rayman", "Raze", "Rebuild", "Redball4", "Retrobowl", "Riddleschool", "Riddletransfer", "Rocketleague", "Rooftopsnipers", "Run3",
-        "Sandboxels", "Scarymazegame", "Scribblenauts", "Shift", "Shortlife", "Silenthill", "Slitherio", "Slope", "Smashkarts", "Snailbob", "Snowrider", "Soccerbros", "Soccerrandom", "Solarsmash", "Sonicadvance", "Sonic3complete", "Spaceinvaders", "Sprunki", "Stackballio", "Starfox64", "Stickmanhook", "Strikeforceheroes", "Subwaysurfers", "Suika", "Supermario64", "Supersmashflash2", "Swordsandsandals",
-        "Taikonotatsujin", "Takeover", "Tanukisunset", "Tecmobowl", "Templeofboom", "Templerun2", "Territorialio", "Tetris", "Theclassroom", "Thedeepestsleep"
+        "1", "10 Bullets", "10 Minutes Til Dawn", "12 Mini Battles", "1 On 1 Soccer", "1v1.lol", "1v1 Tennis", "2048", "2048 Cupcakes", "2 Doom", "2D Shooting", "3 Dash", "3 Pandas", "3 Pandas Brazil", "3 Pandas Fantasy", "3 Pandas Japan", "3 Pandas Night", "3 Slices 2", "40x Escape", "4th and Goal", "500 Caliber Contractz", "60 Seconds Burger Run", "60 Seconds Santa Run", "8 Ball Classic", "8 Ball Pool", "9007199254740992", "99 Balls", "99 Nights ITF",
+        "Abandoned 3", "Absolute Madness", "Ace Combat 2", "Ace Combat 3", "Ace Gangster Taxi", "Achievement Unlocked", "Achillies", "Achillies 2", "Adark Room", "A Day In The Office", "Adofai", "Advance Wars", "Advance Wars 2", "Advent Neon", "Adventure Capitalist", "Agariolite", "Age of War", "Age of War 2", "Ages of Conflict", "Ahoy Survival", "Ai", "Akoopas Revenge", "Akoopas Revenge 2", "Akumanor Gaiden", "Alien Hominid", "Alien Hominid GBA", "Alien Sky Invasion", "Alien Transporter", "Alien vs Predator", "All Bosses in 1", "Allocation", "Amaze", "Amidst The Sky", "Amigo Pancho", "Amigo Pancho 2", "Amigo Pancho 3", "Amigo Pancho 4", "Amigo Pancho 5", "Amigo Pancho 6", "Amigo Pancho 7", "Among Us", "Amorphous", "Ancient Sins", "Angry Birds Space", "Angry Birds", "Angry Birds Showdown", "Animal Crossing Wild World", "Another World", "Apotris", "Apple Shooter", "Apple Worm", "Aquapark.io", "Arceus Legend", "Archery World Tour", "Arena", "Armor Mayhem 2", "Arsonate", "Ascent", "A Small World Cup", "Assesment Examination Que", "Asteroids", "Attack Hole", "Avalanche", "Avia Masters", "Awesome Pirates", "Awesome Planes", "Awesome Tanks", "Awesome Tanks 2",
+        "B3313", "Babel Tower", "Baby Chicco Adventure", "Baby Kaizo", "Baby Sniper In Vietnam", "Backrooms", "Backrooms 2D", "Backyard Baseball", "Backyard Baseball 09", "Backyard Baseball 10", "Backyard Soccer", "Bacon May Die", "Bad Bodyguards", "Bad Ice Cream", "Bad Monday Simulator", "Bad Parenting", "Bad Piggies", "Bad Time Sim", "Baldi Decomp", "Baldis Basics", "Baldis Basics Remaster", "Ball Blast", "Balls and Bricks", "Banana Simulator", "Bandit Gunslingers", "Banjo Kazooie", "Banjo Tooie", "Bank Breakout 2", "Bank Robbery 2", "Barry Has A Secret", "Baseball Bros", "Basketball FRVR", "Basketball Legends", "Basketball Stars", "Basket Battle", "Basket Bros", "Basket Random", "Basket Slam Dunk 2", "Batter Up", "Battle Karts", "Battles", "Battle Zone", "Bazooka Boy", "Beach Boxing Sim", "Beam Rider", "Bearbarians", "Bearsus", "Ben 10 Alien Force", "Ben 10 Omniverse", "Ben 10 Protector", "Ben 10 Racing", "Ben 10 Ultimate Alien", "Bergentruck 201x", "Bfdia 5b", "Big Ice Tower Tiny Square", "Big Neon Tower Tiny Square", "Big Shot Boxing 2", "Big Tower Tiny Square", "Big Tower Tiny Square 2", "Big Time Butter Baron", "Binding of Isacc Sheeptime", "Bio Evil 4", "Bitlife", "Bitlife Encrypted", "Bitplanes", "Blackjack", "Blacksmith Lab", "Blastronaut", "Blaze Drifter", "Bleach vs Naruto", "Blightborne", "Blobs Story 2", "Block Blast", "Block Craft Parkour", "Block Craft Shooter", "Block Post", "Block The Pig", "Blocky Demolition Derby", "Blocky Snakes", "Blood Money", "Blood Tournament", "Bloons", "Bloons 2", "Bloons PP1", "Bloons PP2", "Bloons PP3", "Bloons PP4", "Bloons PP5", "Bloons TD1", "Bloons TD2", "Bloons TD3", "Bloons TD4", "Bloons TD5", "Bloons TD6", "Bloxorz", "Blumgi Racers", "Bmx 2", "Bob The Robber", "Bob The Robber 2", "Bob The Robber 5", "Bolly Beat", "Bomberman", "Bomberman 2", "Bomberman Hero", "Boom Slingers", "Bottle Cracks", "Bottle Flip 3D", "Bounce Back", "Bounce Masters", "Bouncy Motors", "Bounty of One", "Bowl Alt", "Boxhead 2 Playrooms", "Boxhead Nightmare", "Boxing Live 2", "Boxing Random", "Brainrot", "Bridge Race", "BTD 1", "BTD 5", "Bubbleshooter", "Bubble Tanks", "Bubble Tanks 2", "Bubble Tanks 3", "Bubble Tanks Arenas", "Bubble Tanks TD", "Bubsy", "Buckshot Roulette", "Build Now GG", "Bunnyland", "Burger and Frights", "Burrito Bison", "Burrito Bison Revenge", "Burrito Bison Launcha Libre", "Bushido Blade"
     ];
 
     const container = document.getElementById('game-list-container');
@@ -196,8 +183,15 @@
             organized[letter].forEach(gameName => {
                 const card = document.createElement('a');
                 card.className = 'game-card';
-                card.innerText = gameName;
-                card.href = "files/" + gameName + ".html";
+                card.innerText = gameName; // Shows "Adark Room" to viewer
+                
+                // BACKEND MAGIC:
+                // 1. Convert to lowercase ("adark room")
+                // 2. Remove all spaces ("adarkroom")
+                // 3. Add "cl" and ".html" ("cladarkroom.html")
+                const fileName = "cl" + gameName.toLowerCase().replace(/\s+/g, '') + ".html";
+                
+                card.href = fileName;
                 grid.appendChild(card);
             });
 
@@ -208,7 +202,6 @@
 
     function searchGames() {
         const query = document.getElementById('search').value.toLowerCase();
-        const cards = document.querySelectorAll('.game-card');
         const sections = document.querySelectorAll('.letter-section');
 
         sections.forEach(sec => {
@@ -226,7 +219,6 @@
         });
     }
 
-    // Start
     init();
 </script>
 
